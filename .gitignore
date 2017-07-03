@@ -1,0 +1,6 @@
+*.sublime-workspace
+*.sublime-project
+/bower_components
+/node_modules
+.idea
+.log
