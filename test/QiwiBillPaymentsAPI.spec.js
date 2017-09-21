@@ -1,50 +1,44 @@
 const QiwiBillPaymentsAPI = require('../lib/QiwiBillPaymentsAPI.js');
 const chai = require('chai');
-
 const assert = chai.assert;
 
-const key = '59058292';
+
+const key = 'eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjIwNDIsImFwaV91c2VyX2lkIjo1NjYwMzk3Miwic2VjcmV0IjoiQjIwODlDNkI5Q0NDNTdCNDQzNjM0MTBGRkExREFEMDczOTVCRDIyNUQ0MDBCMjlCRkFFRDM5OEZBOTBENDBEMiJ9fQ==';
 
 const qiwiRestApi = new QiwiBillPaymentsAPI(key);
 
-qiwiRestApi.key = key;
 
-const billId = 'fdfvf5';
-const refundId = '';
-const amount = '';
+
+const bill_id = 'test-bill';
+
+const public_key = '5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3ceEvMvCq55ToeErzhxNemD6rMzCtzRx9jhV5kUUUyG2BC9sqbKjkRVuFjWXicbby5XJjUAnKNcNDdfEZ';
+
+const amount = 200;
 
 describe('qiwi api v3', function() {
     it('creates payment form', function(done) {
-        qiwiRestApi.createPaymentForm(billId).then(data => {
-            console.log(data);
-            // TODO assert
-            done();
-        });
+
+        const testLink = 'https://oplata.qiwi.com/form?public_key=5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3ceEvMvCq55ToeErzhxNemD6rMzCtzRx9jhV5kUUUyG2BC9sqbKjkRVuFjWXicbby5XJjUAnKNcNDdfEZ&amount=200&bill_id=test-bill';
+
+        const link = qiwiRestApi.createPaymentForm(public_key, amount, bill_id);
+
+        assert.equal(link, testLink);
+
+        done();
+
     });
 
     it('returns valid bill status', function(done) {
-        qiwiRestApi.getStatus(billId).then(data => {
+        qiwiRestApi.getStatus(bill_id).then(data => {
             console.log(data);
-            // TODO assert
-            done();
+            /*done();*/
         });
     });
 
     it('cancels bill', function(done) {
-        qiwiRestApi.cancel(billId).then(data => {
-            // TODO assert
+        qiwiRestApi.cancel(bill_id).then(data => {
             console.log(data);
-            done();
+            /*done();*/
         });
     });
 });
-
-/*qiwiRestApi.refund(billId, refundId, amount).then(data => {
-    console.log(data);
-});
-
-
-
-qiwiRestApi.getRefundStatus(billId, refundId).then(data => {
-    console.log(data);
-});*/
