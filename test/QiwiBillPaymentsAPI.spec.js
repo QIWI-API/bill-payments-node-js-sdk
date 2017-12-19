@@ -1,5 +1,6 @@
 const QiwiBillPaymentsAPI = require('../lib/QiwiBillPaymentsAPI.js');
 const chai = require('chai');
+const axios = require('axios');
 const assert = chai.assert;
 
 
@@ -9,45 +10,77 @@ const qiwiRestApi = new QiwiBillPaymentsAPI(key);
 
 
 
-const bill_id = '123445';
+const bill_id = '12345678';
 
-const public_key = '5nAq6abtyCz4tcDj89e5w7Y5i524LAFmzrsN6bQTQ3ceEvMvCq55ToeErzhxNemD6rMzCtzRx9jhV5kUUUyG2BC9sqbKjkRVuFjWXicbby5XJjUAnKNcNDdfEZ';
+const refund_id = '0734';
+
+const public_key = '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc';
 
 const amount = 200;
 
 
-describe('qiwi api v3', () => {
-    it('creates payment form', () => {
+describe('qiwi api v3', async () => {
 
-        const testLink = `https://oplata.qiwi.com/create?public_key=${public_key}&amount=${amount}&bill_id=${bill_id}`;
+     try {
 
-        const link = qiwiRestApi.createPaymentForm(public_key, amount, bill_id);
-        console.log(link);
+        let link = '';
 
-        assert.equal(link, testLink);
+        it('creates payment form', () => {
 
-    });
+            const testLink = `https://oplata.qiwi.com/create?public_key=${public_key}&amount=${amount}&bill_id=${bill_id}`;
 
-    it('returns valid bill status', async () => {
+            link = qiwiRestApi.createPaymentForm(public_key, amount, bill_id);
 
-        try {
-            const data = await qiwiRestApi.getStatus(bill_id);
+            console.log(link)
 
-            console.log('info: ', data);
+            assert.equal(link, testLink);
 
-
-
-        } catch (e) {
-            console.log('err: ', e)
-        }
-    });
-
-    /*it('cancels bill', function(done) {
-        qiwiRestApi.cancel(bill_id).then(data => {
-
-            done();
         });
-    });*/
+
+        describe('requests', async () => {
+
+            before(() => {
+                console.log('before')
+            });
+
+
+
+            it('returns valid bill status', async () => {
+
+                try {
+
+                    const data = await qiwiRestApi.getStatus(bill_id);
+
+                    assert.equal( data.result_code, 'SUCCESS');
+
+                } catch (e) {
+                    throw e;
+                }
+            });
+
+            it('cancels bill', async () =>  {
+
+                try {
+
+                    const data = await qiwiRestApi.cancel(bill_id, refund_id);
+
+                    console.log(data)
+
+                    //assert.equal( data.result_code, 'SUCCESS');
+
+                } catch (e) {
+                    throw e;
+                }
+
+            });
+        });
+
+    } catch (e) {
+        console.error(e);
+
+    }
+
+
 });
 
 
