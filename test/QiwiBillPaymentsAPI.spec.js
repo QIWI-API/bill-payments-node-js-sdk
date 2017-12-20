@@ -29,7 +29,7 @@ describe('qiwi api v3', async () => {
 
             const testLink = `https://oplata.qiwi.com/create?public_key=${public_key}&amount=${amount}&bill_id=${bill_id}`;
 
-            link = qiwiRestApi.createPaymentForm(public_key, amount, bill_id);
+            link = qiwiRestApi.createPaymentForm({ public_key, amount, bill_id });
 
             console.log(link)
 
@@ -64,7 +64,7 @@ describe('qiwi api v3', async () => {
 
                     const data = await qiwiRestApi.cancel(bill_id, refund_id);
 
-                    console.log(data)
+                    //console.log(data)
 
                     //assert.equal( data.result_code, 'SUCCESS');
 
