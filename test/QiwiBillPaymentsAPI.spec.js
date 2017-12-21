@@ -62,11 +62,9 @@ describe('qiwi api v3', async () => {
 
                 try {
 
-                    const data = await qiwiRestApi.cancel(bill_id, refund_id);
+                    const data = await qiwiRestApi.cancel(bill_id);
 
-                    //console.log(data)
-
-                    //assert.equal( data.result_code, 'SUCCESS');
+                    assert.equal( data.result_code, 'SUCCESS');
 
                 } catch (e) {
                     throw e;
