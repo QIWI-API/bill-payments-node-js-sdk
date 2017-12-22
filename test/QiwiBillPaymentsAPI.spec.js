@@ -1,6 +1,6 @@
 const QiwiBillPaymentsAPI = require('../lib/QiwiBillPaymentsAPI.js');
 const chai = require('chai');
-const axios = require('axios');
+const Browser = require('zombie');
 const assert = chai.assert;
 
 
@@ -10,7 +10,7 @@ const qiwiRestApi = new QiwiBillPaymentsAPI(key);
 
 
 
-const bill_id = '12345678';
+const bill_id = '12345679';
 
 const refund_id = '0734';
 
@@ -19,9 +19,9 @@ const public_key = '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ
 const amount = 200;
 
 
-describe('qiwi api v3', async () => {
+describe('qiwi api v3', async() => {
 
-     try {
+    try {
 
         let link = '';
 
@@ -37,20 +37,37 @@ describe('qiwi api v3', async () => {
 
         });
 
-        describe('requests', async () => {
+        describe('requests', async() => {
 
-            before(() => {
-                console.log('before')
+            const browser = new Browser();
+
+
+
+            before((done) => {
+
+                browser.visit(link, () => {
+
+                    browser.window.matchMedia = () => {
+                        return {
+                            matches: false,
+                            addListener: function() {},
+                            removeListener: function() {}
+                        };
+                    };
+
+                    done();
+                });
             });
 
 
 
-            it('returns valid bill status', async () => {
+            it('returns valid bill status', async() => {
 
                 try {
 
                     const data = await qiwiRestApi.getStatus(bill_id);
 
+
                     assert.equal( data.result_code, 'SUCCESS');
 
                 } catch (e) {
@@ -58,27 +75,25 @@ describe('qiwi api v3', async () => {
                 }
             });
 
-            it('cancels bill', async () =>  {
+            /* it('cancels bill', async () =>  {
 
-                try {
+                 try {
 
-                    const data = await qiwiRestApi.cancel(bill_id);
+                     const data = await qiwiRestApi.cancel(bill_id);
 
-                    assert.equal( data.result_code, 'SUCCESS');
+                     assert.equal( data.result_code, 'SUCCESS');
 
-                } catch (e) {
-                    throw e;
-                }
+                 } catch (e) {
+                     throw e;
+                 }
 
-            });
+             });*/
         });
 
     } catch (e) {
-        console.error(e);
+        //console.error(e);
 
     }
 
 
 });
-
-
