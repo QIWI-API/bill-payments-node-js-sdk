@@ -1,6 +1,6 @@
 const QiwiBillPaymentsAPI = require('../lib/QiwiBillPaymentsAPI.js');
 const chai = require('chai');
-const Browser = require('zombie');
+/*const Browser = require('zombie');*/
 const assert = chai.assert;
 
 
@@ -10,7 +10,7 @@ const qiwiRestApi = new QiwiBillPaymentsAPI(key);
 
 
 
-const bill_id = '12345679';
+const bill_id = '1234567';
 
 const refund_id = '0734';
 
@@ -31,19 +31,19 @@ describe('qiwi api v3', async() => {
 
             link = qiwiRestApi.createPaymentForm({ public_key, amount, bill_id });
 
-            console.log(link)
+            console.log('Пока так :3 Перейдите по ссылке, потом запустите тест снова: ', link)
 
             assert.equal(link, testLink);
 
         });
 
-        describe('requests', async() => {
+        describe('requests:', async() => {
 
             const browser = new Browser();
 
 
 
-            before((done) => {
+          /*  before((done) => {
 
                 browser.visit(link, () => {
 
@@ -58,7 +58,7 @@ describe('qiwi api v3', async() => {
                     done();
                 });
             });
-
+*/
 
 
             it('returns valid bill status', async() => {
@@ -75,7 +75,7 @@ describe('qiwi api v3', async() => {
                 }
             });
 
-            /* it('cancels bill', async () =>  {
+             it('cancel unpaid bill', async () =>  {
 
                  try {
 
@@ -87,7 +87,7 @@ describe('qiwi api v3', async() => {
                      throw e;
                  }
 
-             });*/
+             });
         });
 
     } catch (e) {
