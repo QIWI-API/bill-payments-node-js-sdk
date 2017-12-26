@@ -4,9 +4,9 @@ const chai = require('chai');
 const assert = chai.assert;
 
 
-const key = 'eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTk5NmI5ZWQ2NmQwNzdkMTg5ZjMwYzZhY2RjMzg1In19';
+const SECRET_KEY = 'eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTk5NmI5ZWQ2NmQwNzdkMTg5ZjMwYzZhY2RjMzg1In19';
 
-const qiwiRestApi = new QiwiBillPaymentsAPI(key);
+const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 
 
 
@@ -29,7 +29,7 @@ describe('qiwi api v3', async() => {
 
             const testLink = `https://oplata.qiwi.com/create?public_key=${public_key}&amount=${amount}&bill_id=${bill_id}`;
 
-            link = qiwiRestApi.createPaymentForm({ public_key, amount, bill_id });
+            link = qiwiApi.createPaymentForm({ public_key, amount, bill_id });
 
             console.log('Пока так :3 Перейдите по ссылке, потом запустите тест снова: ', link)
 
@@ -65,7 +65,7 @@ describe('qiwi api v3', async() => {
 
                 try {
 
-                    const data = await qiwiRestApi.getStatus(bill_id);
+                    const data = await qiwiApi.getStatus(bill_id);
 
 
                     assert.equal( data.result_code, 'SUCCESS');
@@ -79,7 +79,7 @@ describe('qiwi api v3', async() => {
 
                  try {
 
-                     const data = await qiwiRestApi.cancel(bill_id);
+                     const data = await qiwiApi.cancel(bill_id);
 
                      assert.equal( data.result_code, 'SUCCESS');
 
