@@ -12,7 +12,7 @@ $ git clone https://github.com/QIWI-API/bill-payments-node-js-sdk
 Подключение:
 
 ```javascript
-const QiwiBillPaymentsAPI = require('bill-payments-node-js-sdk/lib/QiwiBillPaymentsAPI.js');
+const QiwiBillPaymentsAPI = require('./bill-payments-node-js-sdk');
 ```
 
 ## Документация
