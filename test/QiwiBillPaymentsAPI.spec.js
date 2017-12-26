@@ -10,7 +10,7 @@ const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 
 
 
-const bill_id = '1234567';
+const bill_id = '12345678';
 
 const refund_id = '0734';
 
@@ -39,7 +39,7 @@ describe('qiwi api v3', async() => {
 
         describe('requests:', async() => {
 
-            const browser = new Browser();
+            /* const browser = new Browser(); */
 
 
 
@@ -66,8 +66,7 @@ describe('qiwi api v3', async() => {
                 try {
 
                     const data = await qiwiApi.getStatus(bill_id);
-
-
+                    
                     assert.equal( data.result_code, 'SUCCESS');
 
                 } catch (e) {
@@ -75,7 +74,7 @@ describe('qiwi api v3', async() => {
                 }
             });
 
-             it('cancel unpaid bill', async () =>  {
+            it('cancel unpaid bill', async () =>  {
 
                  try {
 
@@ -91,9 +90,7 @@ describe('qiwi api v3', async() => {
         });
 
     } catch (e) {
-        //console.error(e);
-
+        console.error(e);
     }
-
 
 });

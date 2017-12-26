@@ -6,7 +6,7 @@ Node.js SDK модуль для внедрения единого платежн
 Установка с помощью git clone:
 
 ```bash
-git clone https://github.com/QIWI-API/bill-payments-node-js-sdk
+$ git clone https://github.com/QIWI-API/bill-payments-node-js-sdk
 ```
 
 Подключение:
@@ -186,6 +186,14 @@ qiwiApi.getRefundStatus(bill_id, refund_id).then( data => {
   },
   "result_code": "SUCCESS"
 }
+```
+
+## Тестирование
+
+```bash
+$ cd bill-payments-node-js-sdk
+npm install
+npm run test
 ```
 
 ## Требования
