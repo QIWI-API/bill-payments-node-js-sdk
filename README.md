@@ -1,4 +1,4 @@
-# Unidersal payments API Node.js SDK
+# Universal payments API Node.js SDK
 Node.js SDK модуль для внедрения единого платежного протокола эквайринга и QIWI Кошелька.
 
 ## Установка и подключение
