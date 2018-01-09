@@ -1,16 +1,16 @@
 {
-  "name": "bill-payments-rest-api-node-js-sdk",
-  "version": "1.0.0",
-  "description": "",
-  "main": "lib/QiwiBillPaymentsAPI.js",
-  "scripts": {
-    "test": "mocha --harmony test/QiwiBillPaymentsAPI.spec.js"
-  },
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "chai": "^4.0.2",
-    "mocha": "^3.4.2",
-    "puppeteer": "^0.13.0"
-  }
+    "name": "bill-payments-node-js-sdk",
+    "version": "1.0.0",
+    "description": "",
+    "main": "lib/QiwiBillPaymentsAPI.js",
+    "scripts": {
+        "test": "mocha --harmony test/QiwiBillPaymentsAPI.spec.js"
+    },
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "chai": "^4.0.2",
+        "mocha": "^3.4.2",
+        "puppeteer": "^0.13.0"
+    }
 }

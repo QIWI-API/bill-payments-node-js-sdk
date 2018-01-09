@@ -3,16 +3,16 @@ Node.js SDK модуль для внедрения единого платежн
 
 ## Установка и подключение
 
-Установка с помощью git clone:
+Установка с помощью npm:
 
 ```bash
-$ git clone https://github.com/QIWI-API/bill-payments-node-js-sdk
+$ npm install git+https://github.com/QIWI-API/bill-payments-node-js-sdk.git --save
 ```
 
 Подключение:
 
 ```javascript
-const QiwiBillPaymentsAPI = require('./bill-payments-node-js-sdk');
+const QiwiBillPaymentsAPI = require('bill-payments-node-js-sdk');
 ```
 
 ## Документация
@@ -47,12 +47,12 @@ qiwiApi.key = NEW_SECRET_KEY;
 const public_key = '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc';
 
 const params = {
-    public_key
+    public_key,
     amount: 200,
     bill_id: '893794793973'
 };
 
-const link = qiwiApi.createPaymentForm(params);       
+const link = qiwiApi.createPaymentForm(params);
 ```
 
 В результате:
@@ -77,21 +77,21 @@ qiwiApi.getStatus(bill_id).then( data => {
 
 ```json
 {
-  "bill": {
-    "amount": 200,
-    "bill_id": "893794793973",
-    "comment": "Text comment",
-    "creation_datetime": "2017-08-13T14:30:00.000Z",
-    "currency": "RUB",
-    "expiration_datetime": "2017-10-13T14:30:00.000Z",
-    "extras": {},
-    "pay_url": "https://oplata.qiwi.com/form/?invoice_uid=755ac889-6f94-4f82-a0b8-3dffc24afa60",
-    "site_id": 520170,
-    "status": "WAITING",
-    "status_update_datetime": "2017-09-03T14:30:00.000Z",
-    "user": {}
-  },
-  "result_code": "SUCCESS"
+    "bill": {
+        "amount": 200,
+        "bill_id": "893794793973",
+        "comment": "Text comment",
+        "creation_datetime": "2017-08-13T14:30:00.000Z",
+        "currency": "RUB",
+        "expiration_datetime": "2017-10-13T14:30:00.000Z",
+        "extras": {},
+        "pay_url": "https://oplata.qiwi.com/form/?invoice_uid=755ac889-6f94-4f82-a0b8-3dffc24afa60",
+        "site_id": 520170,
+        "status": "WAITING",
+        "status_update_datetime": "2017-09-03T14:30:00.000Z",
+        "user": {}
+    },
+    "result_code": "SUCCESS"
 }
 ```
 
@@ -111,21 +111,21 @@ qiwiApi.cancel(bill_id).then( data => {
 
 ```json
 {
-  "bill": {
-    "amount": 200,
-    "bill_id": "893794793973",
-    "comment": "Text comment",
-    "creation_datetime": "2017-08-13T14:30:00.000Z",
-    "currency": "RUB",
-    "expiration_datetime": "2017-10-13T14:30:00.000Z",
-    "extras": {},
-    "pay_url": "https://oplata.qiwi.com/form/?invoice_uid=755ac889-6f94-4f82-a0b8-3dffc24afa60",
-    "site_id": 520170,
-    "status": "REJECTED",
-    "status_update_datetime": "2017-09-03T14:30:00.000Z",
-    "user": {}
-  },
-  "result_code": "SUCCESS"
+    "bill": {
+        "amount": 200,
+        "bill_id": "893794793973",
+        "comment": "Text comment",
+        "creation_datetime": "2017-08-13T14:30:00.000Z",
+        "currency": "RUB",
+        "expiration_datetime": "2017-10-13T14:30:00.000Z",
+        "extras": {},
+        "pay_url": "https://oplata.qiwi.com/form/?invoice_uid=755ac889-6f94-4f82-a0b8-3dffc24afa60",
+        "site_id": 520170,
+        "status": "REJECTED",
+        "status_update_datetime": "2017-09-03T14:30:00.000Z",
+        "user": {}
+    },
+    "result_code": "SUCCESS"
 }
 ```
 
@@ -147,15 +147,15 @@ qiwiApi.refund(bill_id, refund_id, amount).then( data => {
 
 ```json
 {
-  "refund": {
-    "amount": 12,
-    "currency": "RUB",
-    "date_time": "2017-09-03T14:30:00.000Z",
-    "refund_id": "899343443",
-    "status": "PARTIAL",
-    "txn_id": 1234
-  },
-  "result_code": "SUCCESS"
+    "refund": {
+        "amount": 12,
+        "currency": "RUB",
+        "date_time": "2017-09-03T14:30:00.000Z",
+        "refund_id": "899343443",
+        "status": "PARTIAL",
+        "txn_id": 1234
+    },
+    "result_code": "SUCCESS"
 }
 ```
 
@@ -176,15 +176,15 @@ qiwiApi.getRefundStatus(bill_id, refund_id).then( data => {
 
 ```json
 {
-  "refund": {
-    "amount": 12,
-    "currency": "RUB",
-    "date_time": "2017-09-03T14:30:00.000Z",
-    "refund_id": "899343443",
-    "status": "PARTIAL",
-    "txn_id": 1234
-  },
-  "result_code": "SUCCESS"
+    "refund": {
+        "amount": 12,
+        "currency": "RUB",
+        "date_time": "2017-09-03T14:30:00.000Z",
+        "refund_id": "899343443",
+        "status": "PARTIAL",
+        "txn_id": 1234
+    },
+    "result_code": "SUCCESS"
 }
 ```
 
