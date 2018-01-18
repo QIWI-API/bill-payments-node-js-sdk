@@ -44,6 +44,18 @@ describe("qiwi api v3", () => {
                 await browser.close();
             });
 
+            /* it("create invoive", async () => {
+                try {
+                    const data = await qiwiApi.createInvoice(bill_id, {
+                        amount
+                    });
+
+                    assert.equal(data.result_code, "SUCCESS");
+                } catch (e) {
+                    throw e;
+                }
+            }); */
+
             it("returns valid bill status", async () => {
                 try {
                     const data = await qiwiApi.getStatus(bill_id);
