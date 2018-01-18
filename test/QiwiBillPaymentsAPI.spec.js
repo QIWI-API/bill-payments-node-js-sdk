@@ -33,7 +33,7 @@ describe("qiwi api v3", () => {
         });
 
         describe("requests: ", function() {
-            this.timeout(3000);
+            this.timeout(6000);
 
             before(async () => {
                 const browser = await puppeteer.launch({
