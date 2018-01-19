@@ -19,5 +19,8 @@
         "eslint-plugin-standard": "^3.0.1",
         "mocha": "^3.4.2",
         "puppeteer": "^0.13.0"
+    },
+    "dependencies": {
+        "uuid": "^3.2.1"
     }
 }
