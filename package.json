@@ -4,13 +4,23 @@
     "description": "",
     "main": "lib/QiwiBillPaymentsAPI.js",
     "scripts": {
-        "test": "mocha --harmony test/QiwiBillPaymentsAPI.spec.js"
+        "test": "mocha --harmony test/QiwiBillPaymentsAPI.spec.js",
+        "lint": "./node_modules/.bin/eslint lib/QiwiBillPaymentsAPI.js lib/request.js"
     },
     "author": "",
     "license": "MIT",
     "devDependencies": {
         "chai": "^4.0.2",
+        "eslint": "^4.15.0",
+        "eslint-config-standard": "^11.0.0-beta.0",
+        "eslint-plugin-import": "^2.8.0",
+        "eslint-plugin-node": "^5.2.1",
+        "eslint-plugin-promise": "^3.6.0",
+        "eslint-plugin-standard": "^3.0.1",
         "mocha": "^3.4.2",
         "puppeteer": "^0.13.0"
+    },
+    "dependencies": {
+        "uuid": "^3.2.1"
     }
 }

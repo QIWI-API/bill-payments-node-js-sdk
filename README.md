@@ -1,4 +1,7 @@
 # Universal payments API Node.js SDK
+
+[![Build Status](https://travis-ci.org/secondtonone/bill-payments-rest-api-node-js-sdk.svg?branch=master)](https://travis-ci.org/secondtonone/bill-payments-rest-api-node-js-sdk)
+
 Node.js SDK модуль для внедрения единого платежного протокола эквайринга и QIWI Кошелька.
 
 ## Установка и подключение
@@ -24,7 +27,7 @@ const QiwiBillPaymentsAPI = require('bill-payments-node-js-sdk');
 Для использования SDK требуется `SECRET_KEY`, подробности в [документации](https://developer.qiwi.com/ru/bill-payments/#auth).
 
 ```javascript
-const SECRET_KEY = 'eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPININONPN090MTg5ZjMwYzZhY2RjMzg1In19';
+const SECRET_KEY = 'eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPININONPN090MTg5Z**********************';
 
 const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 ```
@@ -32,7 +35,7 @@ const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 Смена `SECRET_KEY` на новый:
 
 ```javascript
-const NEW_SECRET_KEY = 'kokoOKPzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTk5NmIbhchhbbHBHIBDBICIBSBSJBSICUSIUUbuui34';
+const NEW_SECRET_KEY = 'kokoOKPzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTk5NmIbhchhbbHBHIBDBI**********************';
 
 qiwiApi.key = NEW_SECRET_KEY;
 ```
@@ -131,7 +134,7 @@ qiwiApi.cancel(bill_id).then( data => {
 
 ### Возврат средств
 
-Методом `refund` производит возврат средств. В параметрах нужно указать идентификатор счета `bill_id`, идентификатор возврата `refund_id` внутри вашей системы и сумму возврата `amount`.
+Методом `refund` производит возврат средств. В параметрах нужно указать идентификатор счета `bill_id`, идентификатор возврата `refund_id` внутри вашей системы и сумму возврата `amount`. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund).
 
 ```javascript
 const bill_id = '893794793973';
@@ -161,7 +164,7 @@ qiwiApi.refund(bill_id, refund_id, amount).then( data => {
 
 ### Статус возврата
 
-Метод `getRefundStatus` запрашивает статус возврата, в параметрах нужно указать идентификатор счета `bill_id`, идентификатор возврата `refund_id` внутри вашей системы. 
+Метод `getRefundStatus` запрашивает статус возврата, в параметрах нужно указать идентификатор счета `bill_id`, идентификатор возврата `refund_id` внутри вашей системы. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund-status).
 
 ```javascript
 const bill_id = '893794793973';
@@ -187,6 +190,15 @@ qiwiApi.getRefundStatus(bill_id, refund_id).then( data => {
     "result_code": "SUCCESS"
 }
 ```
+
+### Вспомогательные методы
+
+* Для генерирования `bill_id`, `refund_id` можно использовать метод `generateId`. Метод возвращает строку в формате UUID v4:
+
+    ```javascript
+    const bill_id = qiwiApi.generateId();
+    //e9b47ee9-b2f9-4b45-9438-52370670e2a6
+    ```
 
 ## Тестирование
 
