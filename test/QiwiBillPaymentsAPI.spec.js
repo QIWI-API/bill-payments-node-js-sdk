@@ -1,7 +1,5 @@
-const crypto = require('crypto');
 const QiwiBillPaymentsAPI = require('../lib/QiwiBillPaymentsAPI.js');
 const chai = require('chai');
-const puppeteer = require('puppeteer');
 const assert = chai.assert;
 
 const SECRET_KEY =
