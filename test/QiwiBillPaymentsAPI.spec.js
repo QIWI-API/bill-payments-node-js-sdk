@@ -9,7 +9,7 @@ const SECRET_KEY =
 
 const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 
-const bill_id = crypto.randomBytes(5).toString('hex');
+const bill_id = qiwiApi.generateId();
 
 const public_key =
     '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc';
@@ -36,6 +36,18 @@ describe('qiwi api v3', () => {
             assert.equal(link, testLink);
         });
 
+        /* it('create invoive', async () => {
+            try {
+                const data = await qiwiApi.createInvoice(bill_id, {
+                    amount
+                });
+
+                assert.equal('SUCCESS', data.result_code);
+            } catch (e) {
+                throw e;
+            }
+        }); */
+
         describe('requests: ', function () {
             this.timeout(6000);
 
@@ -48,33 +60,21 @@ describe('qiwi api v3', () => {
                 await browser.close();
             });
 
-            /* it("create invoive", async () => {
-                try {
-                    const data = await qiwiApi.createInvoice(bill_id, {
-                        amount
-                    });
-
-                    assert.equal(data.result_code, "SUCCESS");
-                } catch (e) {
-                    throw e;
-                }
-            }); */
-
             it('returns valid bill status', async () => {
                 try {
                     const data = await qiwiApi.getStatus(bill_id);
 
-                    assert.equal(data.result_code, 'SUCCESS');
+                    assert.equal('SUCCESS', data.result_code);
                 } catch (e) {
                     throw e;
                 }
             });
 
-                        it('cancel unpaid bill', async () => {
+            it('cancel unpaid bill', async () => {
                 try {
                     const data = await qiwiApi.cancel(bill_id);
 
-                    assert.equal(data.result_code, 'SUCCESS');
+                    assert.equal('SUCCESS', data.result_code);
                 } catch (e) {
                     throw e;
                 }
