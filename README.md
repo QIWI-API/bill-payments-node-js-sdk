@@ -64,6 +64,34 @@ const link = qiwiApi.createPaymentForm(params);
 https://oplata.qiwi.com/create?public_key=2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc&amount=200&bill_id=893794793973
 ```
 
+### Выставление счета
+
+Метод `createInvoice` выставляет новый счет. В параметрах нужно указать: идентификатор счета `bill_id` внутри вашей системы и дополнительными параметрами `fields`. В результате будет получена ответ с данными о выставленном счете.
+
+```javascript
+const bill_id = '893794793973';
+
+const fields = {
+    amount: 1.00,
+    currency: 'RUB',
+    expiration_date_time: '2017-07-25T09:00:00',
+    provider_name: 'Test'
+};
+
+qiwiRestApi.createInvoice( bill_id, fields ).then( data => {
+    //do with data
+});
+```
+
+В результате:
+
+```json
+{ 
+    "result_code": 'SUCCESS',
+    "invoice_uid": '2d4c044f-defa-41e8-af9f-b5edf5ee44ad' 
+}
+```
+
 ### Статус счета
 
 Метод `getStatus` проверяет статус оплаты счета. В параметрах нужно указать идентификатор счета `bill_id` внутри вашей системы, в результате будет получен ответ со статусом счета. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#invoice-status).
@@ -198,6 +226,14 @@ qiwiApi.getRefundStatus(bill_id, refund_id).then( data => {
     ```javascript
     const bill_id = qiwiApi.generateId();
     //e9b47ee9-b2f9-4b45-9438-52370670e2a6
+    ```
+
+* Для генерирования даты до которой счет будет доступен для оплаты `lifetime` можно использовать метод `getLifetimeByDay`. Входной параметр - сколько дней счет будет доступен, если не указанно, то по умолчанию 45 дней. Метод возвращает строку в формате ISO 8601:
+
+    ```javascript
+    //now: 2018-02-04T17:16:58.033Z
+    const bill_id = qiwiApi.getLifetimeByDay(1);
+    //2018-02-05T17:16:58.033Z
     ```
 
 ## Тестирование

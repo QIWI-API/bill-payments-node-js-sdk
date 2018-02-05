@@ -18,6 +18,13 @@ const amount = 200.345;
 
 const extra_test = 'test';
 
+const fields = {
+    amount,
+    currency: 'RUB',
+    expiration_date_time: qiwiApi.getLifetimeByDay(1),
+    provider_name: 'Test'
+};
+
 describe('qiwi api v3', () => {
     try {
         let link = '';
@@ -36,28 +43,16 @@ describe('qiwi api v3', () => {
             assert.equal(link, testLink);
         });
 
-        /* it('create invoive', async () => {
-            try {
-                const data = await qiwiApi.createInvoice(bill_id, {
-                    amount
-                });
+        describe('requests: ', () => {
 
-                assert.equal('SUCCESS', data.result_code);
-            } catch (e) {
-                throw e;
-            }
-        }); */
+            it('create invoive', async () => {
+                try {
+                    const data = await qiwiApi.createInvoice(bill_id, fields);
 
-        describe('requests: ', function () {
-            this.timeout(6000);
-
-            before(async () => {
-                const browser = await puppeteer.launch({
-                    args: ['--no-sandbox', '--disable-setuid-sandbox']
-                });
-                const page = await browser.newPage();
-                await page.goto(link, { waitUntil: 'networkidle2' });
-                await browser.close();
+                    assert.equal('SUCCESS', data.result_code);
+                } catch (e) {
+                    throw e;
+                }
             });
 
             it('returns valid bill status', async () => {
