@@ -66,7 +66,7 @@ https://oplata.qiwi.com/create?public_key=2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6
 
 ### Выставление счета
 
-Метод `createInvoice` выставляет новый счет. В параметрах нужно указать: идентификатор счета `bill_id` внутри вашей системы и дополнительными параметрами `fields`. В результате будет получена ответ с данными о выставленном счете.
+Метод `createInvoice` выставляет новый счет. В параметрах нужно указать: идентификатор счета `bill_id` внутри вашей системы и дополнительными параметрами `fields`. В результате будет получен ответ с данными о выставленном счете.
 
 ```javascript
 const bill_id = '893794793973';
@@ -87,8 +87,8 @@ qiwiRestApi.createInvoice( bill_id, fields ).then( data => {
 
 ```json
 { 
-    "result_code": 'SUCCESS',
-    "invoice_uid": '2d4c044f-defa-41e8-af9f-b5edf5ee44ad' 
+    "result_code": "SUCCESS",
+    "invoice_uid": "2d4c044f-defa-41e8-af9f-b5edf5ee44ad"
 }
 ```
 
@@ -221,19 +221,25 @@ qiwiApi.getRefundStatus(bill_id, refund_id).then( data => {
 
 ### Вспомогательные методы
 
-* Для генерирования `bill_id`, `refund_id` можно использовать метод `generateId`. Метод возвращает строку в формате UUID v4:
+* Метод `generateId` возвращает строку в формате UUID v4, удобно для генерирования `bill_id`, `refund_id`:
 
     ```javascript
     const bill_id = qiwiApi.generateId();
     //e9b47ee9-b2f9-4b45-9438-52370670e2a6
     ```
 
-* Для генерирования даты до которой счет будет доступен для оплаты `lifetime` можно использовать метод `getLifetimeByDay`. Входной параметр - сколько дней счет будет доступен, если не указанно, то по умолчанию 45 дней. Метод возвращает строку в формате ISO 8601:
+* Метод `getLifetimeByDay` генерирует дату до которой счет будет доступен для оплаты - `lifetime`. Входной параметр - сколько дней счет будет доступен, если не указанно, то по умолчанию 45 дней. Метод возвращает строку в формате ISO 8601:
 
     ```javascript
     //now: 2018-02-04T17:16:58.033Z
-    const bill_id = qiwiApi.getLifetimeByDay(1);
+    const lifetime = qiwiApi.getLifetimeByDay(1);
     //2018-02-05T17:16:58.033Z
+    ```
+
+    ```javascript
+    //now: 2018-02-04T17:16:58.033Z
+    const lifetime = qiwiApi.getLifetimeByDay(0.5);
+    //2018-02-05T05:16:58.033Z
     ```
 
 ## Тестирование
