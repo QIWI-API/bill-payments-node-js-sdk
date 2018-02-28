@@ -14,13 +14,12 @@ const public_key =
 
 const amount = 200.345;
 
-const extra_test = 'test';
-
 const fields = {
     amount,
     currency: 'RUB',
     expiration_date_time: qiwiApi.getLifetimeByDay(1),
-    provider_name: 'Test'
+    provider_name: 'Test',
+    comment: 'test'
 };
 
 describe('qiwi api v3', () => {
@@ -43,9 +42,11 @@ describe('qiwi api v3', () => {
 
         describe('requests: ', () => {
 
-            it('create invoive', async () => {
+            it('create invoice', async () => {
                 try {
                     const data = await qiwiApi.createInvoice(bill_id, fields);
+
+                    console.log(data);
 
                     assert.equal('SUCCESS', data.result_code);
                 } catch (e) {
