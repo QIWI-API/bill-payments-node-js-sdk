@@ -42,11 +42,9 @@ describe('qiwi api v3', () => {
 
         describe('requests: ', () => {
 
-            it('create invoice', async () => {
+            it('create bill', async () => {
                 try {
-                    const data = await qiwiApi.createInvoice(bill_id, fields);
-
-                    console.log(data);
+                    const data = await qiwiApi.createBill(bill_id, fields);
 
                     assert.equal('SUCCESS', data.result_code);
                 } catch (e) {
@@ -54,9 +52,11 @@ describe('qiwi api v3', () => {
                 }
             });
 
-            it('returns valid bill status', async () => {
+            it('returns valid bill info', async () => {
                 try {
-                    const data = await qiwiApi.getStatus(bill_id);
+                    const data = await qiwiApi.getBillInfo(bill_id);
+
+                    // TODO check invoice info response structure
 
                     assert.equal('SUCCESS', data.result_code);
                 } catch (e) {
@@ -66,7 +66,7 @@ describe('qiwi api v3', () => {
 
             it('cancel unpaid bill', async () => {
                 try {
-                    const data = await qiwiApi.cancel(bill_id);
+                    const data = await qiwiApi.cancelBill(bill_id);
 
                     assert.equal('SUCCESS', data.result_code);
                 } catch (e) {
