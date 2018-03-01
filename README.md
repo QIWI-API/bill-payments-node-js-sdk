@@ -1,6 +1,6 @@
 # Universal payments API Node.js SDK
 
-[![Build Status](https://travis-ci.org/secondtonone/bill-payments-rest-api-node-js-sdk.svg?branch=master)](https://travis-ci.org/secondtonone/bill-payments-rest-api-node-js-sdk)
+[![Build Status](https://travis-ci.org/QIWI-API/bill-payments-node-js-sdk.svg?branch=master)](https://travis-ci.org/QIWI-API/bill-payments-node-js-sdk.svg?branch=master)
 [![npm (scoped)](https://img.shields.io/npm/v/@qiwi/bill-payments-node-js-sdk.svg)](https://www.npmjs.com/package/@qiwi/bill-payments-node-js-sdk)
 
 Node.js SDK модуль для внедрения единого платежного протокола эквайринга и QIWI Кошелька.
