@@ -43,8 +43,10 @@ describe('qiwi api v3', () => {
 
         describe ('util', () => {
             const merchantSecret = 'test-merchant-secret-for-signature-check';
-            const validSignature = '07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b';
-            const invalidSignature = 'foo';
+            const validSignatureFromNotificationServer =
+                '07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b';
+
+            const invalidSignatureFromNotificationServer = 'foo';
 
             const notificationData = {
                 bill: {
@@ -63,13 +65,13 @@ describe('qiwi api v3', () => {
             describe('signature check', () => {
                 it('should return false on wrong signature', () => {
                     assert.equal(false, qiwiApi.checkNotificationSignature(
-                        invalidSignature, notificationData, merchantSecret
+                        invalidSignatureFromNotificationServer, notificationData, merchantSecret
                     ));
                 });
 
                 it('should return true on valid signature', () => {
                     assert.equal(true, qiwiApi.checkNotificationSignature(
-                        validSignature, notificationData, merchantSecret
+                        validSignatureFromNotificationServer, notificationData, merchantSecret
                     ));
                 });
             });

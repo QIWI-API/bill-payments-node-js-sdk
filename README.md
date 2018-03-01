@@ -281,6 +281,34 @@ qiwiApi.getRefundInfo(bill_id, refund_id).then( data => {
     const lifetime = qiwiApi.getLifetimeByDay(0.5);
     //2018-02-05T05:16:58.033Z
     ```
+    
+* Метод `checkNotificationSignature` осуществляет проверку подписи при нотификации о новом счете от сервера уведомлений QIWI. Принимает на вход подпись из входящего запроса, объект - тело запроса и secret ключ, с помощью которого должна осуществляться подпись:
+
+    ```javascript
+    const validSignatureFromNotificationServer =
+          '07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b';
+
+    const notificationData = {
+        bill: {
+            site_id: 'test',
+            bill_id: 'test_bill',
+            amount: { value: 1, currency: 'RUB' },
+            status: { value: 'PAID', datetime: '2018-03-01T11:16:12' },
+            customer: {},
+            extra: {},
+            creation_datetime: '2018-03-01T11:15:39',
+            expiration_datetime: '2018-04-15T11:15:39'
+        },
+        version: '3'
+    };
+  
+    const merchantSecret = 'test-merchant-secret-for-signature-check';
+  
+    qiwiApi.checkNotificationSignature(
+        validSignatureFromNotificationServer, notificationData, merchantSecret
+    ); // true
+
+    ```
 
 ## Тестирование
 
