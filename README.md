@@ -110,7 +110,7 @@ qiwiRestApi.createBill( bill_id, fields ).then( data => {
 
 ### Информация о счете
 
-Метод `getBillInfo` проверяет статус оплаты счета. В параметрах нужно указать идентификатор счета `bill_id` внутри вашей системы, в результате будет получен ответ со статусом счета. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#invoice-status).
+Метод `getBillInfo` возвращает информацию о счете. В параметрах нужно указать идентификатор счета `bill_id` внутри вашей системы, в результате будет получен ответ со статусом счета. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#invoice-status).
 
 ```javascript
 const bill_id = '893794793973';
