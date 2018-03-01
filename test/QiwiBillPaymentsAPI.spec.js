@@ -41,6 +41,40 @@ describe('qiwi api v3', () => {
             assert.equal(link, testLink);
         });
 
+        describe ('util', () => {
+            const merchantSecret = 'test-merchant-secret-for-signature-check';
+            const validSignature = '07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b';
+            const invalidSignature = 'foo';
+
+            const notificationData = {
+                bill: {
+                    site_id: 'test',
+                    bill_id: 'test_bill',
+                    amount: { value: 1, currency: 'RUB' },
+                    status: { value: 'PAID', datetime: '2018-03-01T11:16:12' },
+                    customer: {},
+                    extra: {},
+                    creation_datetime: '2018-03-01T11:15:39',
+                    expiration_datetime: '2018-04-15T11:15:39'
+                },
+                version: '3'
+            };
+
+            describe('signature check', () => {
+                it('should return false on wrong signature', () => {
+                    assert.equal(false, qiwiApi.checkNotificationSignature(
+                        invalidSignature, notificationData, merchantSecret
+                    ));
+                });
+
+                it('should return true on valid signature', () => {
+                    assert.equal(true, qiwiApi.checkNotificationSignature(
+                        validSignature, notificationData, merchantSecret
+                    ));
+                });
+            });
+        });
+
         describe('requests: ', () => {
 
             it('create bill', async () => {
@@ -90,8 +124,6 @@ describe('qiwi api v3', () => {
                     const data = await qiwiApi.refund(
                         testConfig.billIdForRefundTest, Date.now(), '0.01', 'RUB'
                     );
-
-                    console.log(data);
 
                     assert.equal('SUCCESS', data.result_code);
                 } catch (e) {
