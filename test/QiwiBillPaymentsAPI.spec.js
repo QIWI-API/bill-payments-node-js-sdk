@@ -1,16 +1,15 @@
 const QiwiBillPaymentsAPI = require('../lib/QiwiBillPaymentsAPI.js');
 const chai = require('chai');
 const assert = chai.assert;
+const testConfig = require('./config');
 
-const SECRET_KEY =
-    'eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTk5NmI5ZWQ2NmQwNzdkMTg5ZjMwYzZhY2RjMzg1In19';
+const SECRET_KEY = testConfig.merchantSecretKey
 
 const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 
 const bill_id = qiwiApi.generateId();
 
-const public_key =
-    '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc';
+const public_key = testConfig.merchantSecretKey
 
 const amount = 200.345;
 
@@ -25,6 +24,8 @@ const fields = {
 describe('qiwi api v3', () => {
     try {
         let link = '';
+
+        // TODO check response structure
 
         it('creates payment form', () => {
             const testLink = `https://oplata.qiwi.com/create?public_key=${public_key}&amount=${parseFloat(
@@ -56,8 +57,6 @@ describe('qiwi api v3', () => {
                 try {
                     const data = await qiwiApi.getBillInfo(bill_id);
 
-                    // TODO check invoice info response structure
-
                     assert.equal('SUCCESS', data.result_code);
                 } catch (e) {
                     throw e;
@@ -67,6 +66,32 @@ describe('qiwi api v3', () => {
             it('cancel unpaid bill', async () => {
                 try {
                     const data = await qiwiApi.cancelBill(bill_id);
+
+                    assert.equal('SUCCESS', data.result_code);
+                } catch (e) {
+                    throw e;
+                }
+            });
+
+            it('gets refund info', async () => {
+                try {
+                    const data = await qiwiApi.getRefundInfo(
+                        testConfig.billIdForGetRefundInfoTest, testConfig.billRefundIdForGetRefundInfoTest
+                    );
+
+                    assert.equal('SUCCESS', data.result_code);
+                } catch (e) {
+                    throw e;
+                }
+            });
+
+            it('makes refund', async () => {
+                try {
+                    const data = await qiwiApi.refund(
+                        testConfig.billIdForRefundTest, Date.now(), '0.01', 'RUB'
+                    );
+
+                    console.log(data);
 
                     assert.equal('SUCCESS', data.result_code);
                 } catch (e) {
