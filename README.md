@@ -176,7 +176,7 @@ qiwiApi.cancelBill(bill_id).then( data => {
      "creation_datetime": "2018-03-01T11:44:07",
      "expiration_datetime": "2018-03-02T08:44:07",
      "pay_url": "https://oplata.qiwi.com/form/?invoice_uid=be7597f6-52bc-46f2-beb8-8bd329d42170"
-   } 
+  }
 }
 ```
 
@@ -195,7 +195,7 @@ qiwiApi.refund(bill_id, refund_id, amount, currency).then( data => {
 });
 ```
 
-В результате будет получен ответ c информацией о возврате:
+В результате будет получен ответ c информацией о возврате и о счете:
 
 ```json
 {
@@ -207,6 +207,22 @@ qiwiApi.refund(bill_id, refund_id, amount, currency).then( data => {
         "currency": "RUB" 
      },
      "date_time": "2018-02-28T16:18:36" 
+  },
+  "bill": { 
+     "site_id": 529089,
+     "bill_id": "be7597f6-52bc-46f2-beb8-8bd329d42170",
+     "amount": { 
+        "value": 1.00, 
+        "currency": "RUB" 
+     },
+     "status": { 
+        "value": "WAITING",
+        "datetime": "2018-03-01T11:44:07" 
+     },
+     "comment": "test",
+     "creation_datetime": "2018-03-01T11:44:07",
+     "expiration_datetime": "2018-03-02T08:44:07",
+     "pay_url": "https://oplata.qiwi.com/form/?invoice_uid=be7597f6-52bc-46f2-beb8-8bd329d42170"
   },
   "result_code": "SUCCESS"
 }
