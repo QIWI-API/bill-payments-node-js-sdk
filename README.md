@@ -182,7 +182,7 @@ qiwiApi.cancelBill(bill_id).then( data => {
 
 ### Возврат средств
 
-Методом `refund` производит возврат средств. В параметрах нужно указать идентификатор счета `bill_id`, идентификатор возврата `refund_id` внутри вашей системы и сумму возврата `amount`. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund).
+Методом `refund` производит возврат средств. В параметрах нужно указать идентификатор счета `bill_id`, идентификатор возврата `refund_id` внутри вашей системы, сумму возврата `amount` и валюту возврата `currency`. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund).
 
 ```javascript
 const bill_id = '893794793973';
