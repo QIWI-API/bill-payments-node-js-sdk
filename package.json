@@ -1,6 +1,6 @@
 {
   "name": "@qiwi/bill-payments-node-js-sdk",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Universal payments API SDK",
   "homepage": "https://github.com/QIWI-API/bill-payments-node-js-sdk",
   "repository": {
