@@ -1,15 +1,15 @@
 const QiwiBillPaymentsAPI = require('../lib/QiwiBillPaymentsAPI.js');
 const chai = require('chai');
 const assert = chai.assert;
-const testConfig = require('./config');
+const testConfig = require('../config.js');
 
-const SECRET_KEY = testConfig.merchantSecretKey
+const SECRET_KEY = testConfig.merchantSecretKey;
 
 const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 
 const bill_id = qiwiApi.generateId();
 
-const public_key = testConfig.merchantSecretKey
+const public_key = testConfig.merchantSecretKey;
 
 const amount = 200.345;
 
