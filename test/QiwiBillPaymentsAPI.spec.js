@@ -1,7 +1,8 @@
 const QiwiBillPaymentsAPI = require('../lib/QiwiBillPaymentsAPI.js');
 const chai = require('chai');
 const assert = chai.assert;
-const testConfig = require('../config.js');
+
+const testConfig = require('./config.js');
 
 const SECRET_KEY = testConfig.merchantSecretKey;
 
