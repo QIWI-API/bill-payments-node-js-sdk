@@ -76,7 +76,9 @@ const fields = {
     amount: 1.00,
     currency: 'RUB',
     comment: 'test',
-    expiration_date_time: '2018-03-02T08:44:07'
+    expiration_date_time: '2018-03-02T08:44:07',
+    email: 'example@mail.org',
+    account : 'client4563'
 };
 
 qiwiRestApi.createBill( bill_id, fields ).then( data => {
