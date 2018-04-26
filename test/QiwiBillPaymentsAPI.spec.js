@@ -1,6 +1,7 @@
 const QiwiBillPaymentsAPI = require('../lib/QiwiBillPaymentsAPI.js');
 const chai = require('chai');
 const assert = chai.assert;
+
 const testConfig = require('./config.js');
 
 const SECRET_KEY = testConfig.merchantSecretKey;
@@ -41,7 +42,7 @@ describe('qiwi api v3', () => {
             assert.equal(link, testLink);
         });
 
-        describe ('util', () => {
+        describe('util', () => {
             const merchantSecret = 'test-merchant-secret-for-signature-check';
             const validSignatureFromNotificationServer =
                 '07e0ebb10916d97760c196034105d010607a6c6b7d72bfa1c3451448ac484a3b';
@@ -64,21 +65,30 @@ describe('qiwi api v3', () => {
 
             describe('signature check', () => {
                 it('should return false on wrong signature', () => {
-                    assert.equal(false, qiwiApi.checkNotificationSignature(
-                        invalidSignatureFromNotificationServer, notificationData, merchantSecret
-                    ));
+                    assert.equal(
+                        false,
+                        qiwiApi.checkNotificationSignature(
+                            invalidSignatureFromNotificationServer,
+                            notificationData,
+                            merchantSecret
+                        )
+                    );
                 });
 
                 it('should return true on valid signature', () => {
-                    assert.equal(true, qiwiApi.checkNotificationSignature(
-                        validSignatureFromNotificationServer, notificationData, merchantSecret
-                    ));
+                    assert.equal(
+                        true,
+                        qiwiApi.checkNotificationSignature(
+                            validSignatureFromNotificationServer,
+                            notificationData,
+                            merchantSecret
+                        )
+                    );
                 });
             });
         });
 
         describe('requests: ', () => {
-
             it('create bill', async () => {
                 try {
                     const data = await qiwiApi.createBill(bill_id, fields);
@@ -99,11 +109,16 @@ describe('qiwi api v3', () => {
                 }
             });
 
-            it('cancel unpaid bill', async () => {
+            it('cancel unpaid bill', async function () {
+                this.timeout(50000);
                 try {
                     const data = await qiwiApi.cancelBill(bill_id);
 
-                    assert.equal('SUCCESS', data.result_code);
+                    if (data.result_code === 'RETRYABLE_ERROR') {
+                        this.retries(1);
+                    } else {
+                        assert.equal('SUCCESS', data.result_code);
+                    }
                 } catch (e) {
                     throw e;
                 }
@@ -112,7 +127,8 @@ describe('qiwi api v3', () => {
             it('gets refund info', async () => {
                 try {
                     const data = await qiwiApi.getRefundInfo(
-                        testConfig.billIdForGetRefundInfoTest, testConfig.billRefundIdForGetRefundInfoTest
+                        testConfig.billIdForGetRefundInfoTest,
+                        testConfig.billRefundIdForGetRefundInfoTest
                     );
 
                     assert.equal('SUCCESS', data.result_code);
@@ -124,7 +140,10 @@ describe('qiwi api v3', () => {
             it('makes refund', async () => {
                 try {
                     const data = await qiwiApi.refund(
-                        testConfig.billIdForRefundTest, Date.now(), '0.01', 'RUB'
+                        testConfig.billIdForRefundTest,
+                        Date.now(),
+                        '0.01',
+                        'RUB'
                     );
 
                     assert.equal('SUCCESS', data.result_code);
