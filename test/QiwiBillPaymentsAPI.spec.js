@@ -137,7 +137,8 @@ describe('qiwi api v3', () => {
                 }
             });
 
-            it('makes refund', async () => {
+            it('makes refund', async function () {
+                this.timeout(50000);
                 try {
                     const data = await qiwiApi.refund(
                         testConfig.billIdForRefundTest,
@@ -146,7 +147,11 @@ describe('qiwi api v3', () => {
                         'RUB'
                     );
 
-                    assert.equal('SUCCESS', data.result_code);
+                    if (data.result_code === 'RETRYABLE_ERROR') {
+                        this.retries(1);
+                    } else {
+                        assert.equal('SUCCESS', data.result_code);
+                    }
                 } catch (e) {
                     throw e;
                 }
