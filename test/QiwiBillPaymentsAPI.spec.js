@@ -114,7 +114,7 @@ describe('qiwi api v3', () => {
                 try {
                     const data = await qiwiApi.cancelBill(bill_id);
 
-                    if (data.result_code === 'RETRYABLE_ERROR') {
+                    if (data.result_code !== 'SUCCESS') {
                         this.retries(1);
                     } else {
                         assert.equal('SUCCESS', data.result_code);
@@ -147,7 +147,7 @@ describe('qiwi api v3', () => {
                         'RUB'
                     );
 
-                    if (data.result_code === 'RETRYABLE_ERROR') {
+                    if (data.result_code !== 'SUCCESS') {
                         this.retries(1);
                     } else {
                         assert.equal('SUCCESS', data.result_code);
