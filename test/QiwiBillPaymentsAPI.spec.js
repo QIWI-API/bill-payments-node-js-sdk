@@ -8,35 +8,35 @@ const SECRET_KEY = testConfig.merchantSecretKey;
 
 const qiwiApi = new QiwiBillPaymentsAPI(SECRET_KEY);
 
-const bill_id = qiwiApi.generateId();
+const billId = qiwiApi.generateId();
 
-const public_key = testConfig.merchantSecretKey;
+const publicKey = testConfig.merchantSecretKey;
 
 const amount = 200.345;
 
 const fields = {
     amount,
     currency: 'RUB',
-    expiration_date_time: qiwiApi.getLifetimeByDay(1),
-    provider_name: 'Test',
+    expirationDatetime: qiwiApi.getLifetimeByDay(1),
+    providerName: 'Test',
     comment: 'test'
 };
 
-describe('qiwi api v3', () => {
+describe('qiwi api v4', () => {
     try {
         let link = '';
 
         // TODO check response structure
 
         it('creates payment form', () => {
-            const testLink = `https://oplata.qiwi.com/create?public_key=${public_key}&amount=${parseFloat(
+            const testLink = `https://oplata.qiwi.com/create?publicKey=${publicKey}&amount=${parseFloat(
                 amount
-            ).toFixed(2)}&bill_id=${bill_id}`;
+            ).toFixed(2)}&billId=${billId}`;
 
             link = qiwiApi.createPaymentForm({
-                public_key,
+                publicKey,
                 amount,
-                bill_id
+                billId
             });
 
             assert.equal(link, testLink);
@@ -51,14 +51,14 @@ describe('qiwi api v3', () => {
 
             const notificationData = {
                 bill: {
-                    site_id: 'test',
-                    bill_id: 'test_bill',
-                    amount: { value: 1, currency: 'RUB' },
-                    status: { value: 'PAID', datetime: '2018-03-01T11:16:12' },
+                    siteId: 'test',
+                    billId: 'test_bill',
+                    amount: {value: 1, currency: 'RUB'},
+                    status: {value: 'PAID', datetime: '2018-03-01T11:16:12'},
                     customer: {},
                     extra: {},
-                    creation_datetime: '2018-03-01T11:15:39',
-                    expiration_datetime: '2018-04-15T11:15:39'
+                    creationDatetime: '2018-03-01T11:15:39',
+                    expirationDatetime: '2018-04-15T11:15:39'
                 },
                 version: '3'
             };
@@ -90,71 +90,31 @@ describe('qiwi api v3', () => {
 
         describe('requests: ', () => {
             it('create bill', async () => {
-                try {
-                    const data = await qiwiApi.createBill(bill_id, fields);
-
-                    assert.equal('SUCCESS', data.result_code);
-                } catch (e) {
-                    throw e;
-                }
+                await qiwiApi.createBill(billId, fields);
             });
 
             it('returns valid bill info', async () => {
-                try {
-                    const data = await qiwiApi.getBillInfo(bill_id);
-
-                    assert.equal('SUCCESS', data.result_code);
-                } catch (e) {
-                    throw e;
-                }
+                await qiwiApi.getBillInfo(billId);
             });
 
             it('cancel unpaid bill', async function () {
-                this.timeout(50000);
-                try {
-                    const data = await qiwiApi.cancelBill(bill_id);
-
-                    if (data.result_code !== 'SUCCESS') {
-                        this.retries(1);
-                    } else {
-                        assert.equal('SUCCESS', data.result_code);
-                    }
-                } catch (e) {
-                    throw e;
-                }
+                await qiwiApi.cancelBill(billId);
             });
 
             it('gets refund info', async () => {
-                try {
-                    const data = await qiwiApi.getRefundInfo(
-                        testConfig.billIdForGetRefundInfoTest,
-                        testConfig.billRefundIdForGetRefundInfoTest
-                    );
-
-                    assert.equal('SUCCESS', data.result_code);
-                } catch (e) {
-                    throw e;
-                }
+                await qiwiApi.getRefundInfo(
+                    testConfig.billIdForGetRefundInfoTest,
+                    testConfig.billRefundIdForGetRefundInfoTest
+                );
             });
 
             it('makes refund', async function () {
-                this.timeout(50000);
-                try {
-                    const data = await qiwiApi.refund(
-                        testConfig.billIdForRefundTest,
-                        Date.now(),
-                        '0.01',
-                        'RUB'
-                    );
-
-                    if (data.result_code !== 'SUCCESS') {
-                        this.retries(1);
-                    } else {
-                        assert.equal('SUCCESS', data.result_code);
-                    }
-                } catch (e) {
-                    throw e;
-                }
+                await qiwiApi.refund(
+                    testConfig.billIdForGetRefundInfoTest,
+                    Date.now(),
+                    '0.01',
+                    'RUB'
+                );
             });
         });
     } catch (e) {

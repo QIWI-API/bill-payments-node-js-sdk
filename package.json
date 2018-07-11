@@ -1,6 +1,6 @@
 {
   "name": "@qiwi/bill-payments-node-js-sdk",
-  "version": "2.2.4",
+  "version": "3.0.0",
   "description": "Universal payments API SDK",
   "homepage": "https://github.com/QIWI-API/bill-payments-node-js-sdk",
   "repository": {
@@ -9,7 +9,7 @@
   },
   "main": "lib/QiwiBillPaymentsAPI.js",
   "scripts": {
-    "test": "mocha --harmony test/QiwiBillPaymentsAPI.spec.js",
+    "test": "mocha $NODE_DEBUG_OPTION --harmony test/QiwiBillPaymentsAPI.spec.js",
     "lint": "eslint lib/QiwiBillPaymentsAPI.js lib/request.js"
   },
   "author": "Maxim Kuznetsov <secondtonone.secondtonone@gmail.com>",
@@ -25,6 +25,8 @@
     "mocha": "^3.4.2"
   },
   "dependencies": {
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
     "uuid": "^3.2.1"
   },
   "bugs": {
