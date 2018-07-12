@@ -54,13 +54,8 @@ describe('qiwi api v4', () => {
                     siteId: 'test',
                     billId: 'test_bill',
                     amount: {value: 1, currency: 'RUB'},
-                    status: {value: 'PAID', datetime: '2018-03-01T11:16:12'},
-                    customer: {},
-                    extra: {},
-                    creationDatetime: '2018-03-01T11:15:39',
-                    expirationDatetime: '2018-04-15T11:15:39'
-                },
-                version: '3'
+                    status: {value: 'PAID'}
+                }
             };
 
             describe('signature check', () => {

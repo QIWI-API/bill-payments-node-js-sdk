@@ -45,15 +45,15 @@ qiwiApi.key = NEW_SECRET_KEY;
 
 ### Платежная форма
 
-Метод `createPaymentForm` создает платежную форму. В параметрах нужно указать: ключ идентификации провайдера, полученный в QIWI Кассе `public_key`, идентификатор счета `bill_id` внутри вашей системы и сумму `amount`. В результате будет получена ссылка на форму оплаты, которую можно передать клиенту. Подробнее о доступных параметрах в [документации](https://developer.qiwi.com/ru/bill-payments/#http).
+Метод `createPaymentForm` создает платежную форму. В параметрах нужно указать: ключ идентификации провайдера, полученный в QIWI Кассе `publicKey`, идентификатор счета `billId` внутри вашей системы и сумму `amount`. В результате будет получена ссылка на форму оплаты, которую можно передать клиенту. Подробнее о доступных параметрах в [документации](https://developer.qiwi.com/ru/bill-payments/#http).
 
 ```javascript
-const public_key = '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc';
+const publicKey = '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc';
 
 const params = {
-    public_key,
+    publicKey,
     amount: 200,
-    bill_id: '893794793973'
+    billId: '893794793973'
 };
 
 const link = qiwiApi.createPaymentForm(params);
@@ -62,26 +62,26 @@ const link = qiwiApi.createPaymentForm(params);
 В результате:
 
 ```
-https://oplata.qiwi.com/create?public_key=2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc&amount=200&bill_id=893794793973
+https://oplata.qiwi.com/create?publicKey=2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc&amount=200&billId=893794793973
 ```
 
 ### Выставление счета
 
-Метод `createBill` выставляет новый счет. В параметрах нужно указать: идентификатор счета `bill_id` внутри вашей системы и дополнительными параметрами `fields`. В результате будет получен ответ с данными о выставленном счете.
+Метод `createBill` выставляет новый счет. В параметрах нужно указать: идентификатор счета `billId` внутри вашей системы и дополнительными параметрами `fields`. В результате будет получен ответ с данными о выставленном счете.
 
 ```javascript
-const bill_id = '893794793973';
+const billId = '893794793973';
 
 const fields = {
     amount: 1.00,
     currency: 'RUB',
     comment: 'test',
-    expiration_date_time: '2018-03-02T08:44:07',
+    expirationDatetime: '2018-03-02T08:44:07',
     email: 'example@mail.org',
     account : 'client4563'
 };
 
-qiwiRestApi.createBill( bill_id, fields ).then( data => {
+qiwiRestApi.createBill( billId, fields ).then( data => {
     //do with data
 });
 ```
@@ -89,35 +89,32 @@ qiwiRestApi.createBill( bill_id, fields ).then( data => {
 В результате:
 
 ```json
-{ 
-  "result_code": "SUCCESS",
-  "bill": { 
-     "site_id": 529089,
-     "bill_id": "be7597f6-52bc-46f2-beb8-8bd329d42170",
-     "amount": { 
-        "value": 1.00, 
-        "currency": "RUB" 
-     },
-     "status": { 
-        "value": "WAITING",
-        "datetime": "2018-03-01T11:44:07" 
-     },
-     "comment": "test",
-     "creation_datetime": "2018-03-01T11:44:07",
-     "expiration_datetime": "2018-03-02T08:44:07",
-     "pay_url": "https://oplata.qiwi.com/form/?invoice_uid=be7597f6-52bc-46f2-beb8-8bd329d42170"
-   } 
+{
+  "siteId": "270305",
+  "billId": "cc961e8d-d4d6-4f02-b737-2297e51fb48e",
+  "amount": {
+    "currency": "RUB",
+    "value": "200.34"
+  },
+  "status": {
+    "value": "WAITING",
+    "changedDateTime": "2018-07-12T10:28:38.855+03:00"
+  },
+  "comment": "test",
+  "creationDatetime": "2018-07-12T10:28:38.855+03:00",
+  "expirationDatetime": "2018-08-26T10:28:38.855+03:00",
+  "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=bb773791-9bd9-42c1-b8fc-3358cd108422"
 }
 ```
 
 ### Информация о счете
 
-Метод `getBillInfo` возвращает информацию о счете. В параметрах нужно указать идентификатор счета `bill_id` внутри вашей системы, в результате будет получен ответ со статусом счета. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#invoice-status).
+Метод `getBillInfo` возвращает информацию о счете. В параметрах нужно указать идентификатор счета `billId` внутри вашей системы, в результате будет получен ответ со статусом счета. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#invoice-status).
 
 ```javascript
-const bill_id = '893794793973';
+const billId = '893794793973';
 
-qiwiApi.getBillInfo(bill_id).then( data => {
+qiwiApi.getBillInfo(billId).then( data => {
     //do with data
 });
 ```
@@ -125,35 +122,32 @@ qiwiApi.getBillInfo(bill_id).then( data => {
 Ответ:
 
 ```json
-{ 
-  "result_code": "SUCCESS",
-  "bill": { 
-     "site_id": 529089,
-     "bill_id": "be7597f6-52bc-46f2-beb8-8bd329d42170",
-     "amount": { 
-        "value": 1.00, 
-        "currency": "RUB" 
-     },
-     "status": { 
-        "value": "WAITING",
-        "datetime": "2018-03-01T11:44:07" 
-     },
-     "comment": "test",
-     "creation_datetime": "2018-03-01T11:44:07",
-     "expiration_datetime": "2018-03-02T08:44:07",
-     "pay_url": "https://oplata.qiwi.com/form/?invoice_uid=be7597f6-52bc-46f2-beb8-8bd329d42170"
-   } 
+{
+  "siteId": "270305",
+  "billId": "4fa5cb2a-942e-4e67-b552-ff10c71d6f8d",
+  "amount": {
+    "currency": "RUB",
+    "value": "200.34"
+  },
+  "status": {
+    "value": "WAITING",
+    "changedDateTime": "2018-07-12T10:31:06.846+03:00"
+  },
+  "comment": "test",
+  "creationDatetime": "2018-07-12T10:31:06.846+03:00",
+  "expirationDatetime": "2018-08-26T10:31:06.846+03:00",
+  "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=ee3ad91d-cfb8-4dbf-8449-b6859fdfec3c"
 }
 ```
 
 ### Отмена неоплаченного счета
 
-Метод `cancelBill` отменяет неоплаченный счет. В параметрах нужно указать идентификатор счета `bill_id` внутри вашей системы, в результате будет получен ответ с информацией о счете. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#invoice-status).
+Метод `cancelBill` отменяет неоплаченный счет. В параметрах нужно указать идентификатор счета `billId` внутри вашей системы, в результате будет получен ответ с информацией о счете. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#invoice-status).
 
 ```javascript
-const bill_id = '893794793973';
+const billId = '893794793973';
 
-qiwiApi.cancelBill(bill_id).then( data => {
+qiwiApi.cancelBill(billId).then( data => {
     //do with data
 });
 ```
@@ -161,38 +155,35 @@ qiwiApi.cancelBill(bill_id).then( data => {
 Ответ:
 
 ```json
-{ 
-  "result_code": "SUCCESS",
-  "bill": { 
-     "site_id": 529089,
-     "bill_id": "be7597f6-52bc-46f2-beb8-8bd329d42170",
-     "amount": { 
-        "value": 1.00, 
-        "currency": "RUB" 
-     },
-     "status": { 
-        "value": "WAITING",
-        "datetime": "2018-03-01T11:44:07" 
-     },
-     "comment": "test",
-     "creation_datetime": "2018-03-01T11:44:07",
-     "expiration_datetime": "2018-03-02T08:44:07",
-     "pay_url": "https://oplata.qiwi.com/form/?invoice_uid=be7597f6-52bc-46f2-beb8-8bd329d42170"
-  }
+{
+  "siteId": "270305",
+  "billId": "60418b7e-1e95-4ac0-936e-0b98d7a7fdae",
+  "amount": {
+    "currency": "RUB",
+    "value": "200.34"
+  },
+  "status": {
+    "value": "REJECTED",
+    "changedDateTime": "2018-07-12T10:32:17.595+03:00"
+  },
+  "comment": "test",
+  "creationDatetime": "2018-07-12T10:32:17.481+03:00",
+  "expirationDatetime": "2018-08-26T10:32:17.481+03:00",
+  "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=a3fe62b2-9962-4d9d-9025-0766fb492546"
 }
 ```
 
 ### Возврат средств
 
-Методом `refund` производит возврат средств. В параметрах нужно указать идентификатор счета `bill_id`, идентификатор возврата `refund_id` внутри вашей системы, сумму возврата `amount` и валюту возврата `currency`. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund).
+Методом `refund` производит возврат средств. В параметрах нужно указать идентификатор счета `billId`, идентификатор возврата `refundId` внутри вашей системы, сумму возврата `amount` и валюту возврата `currency`. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund).
 
 ```javascript
-const bill_id = '893794793973';
-const refund_id = '899343443';
+const billId = '893794793973';
+const refundId = '899343443';
 const amount = 12;
 const currency = 'RUB'
 
-qiwiApi.refund(bill_id, refund_id, amount, currency).then( data => {
+qiwiApi.refund(billId, refundId, amount, currency).then( data => {
     //do with data
 });
 ```
@@ -201,44 +192,25 @@ qiwiApi.refund(bill_id, refund_id, amount, currency).then( data => {
 
 ```json
 {
-  "refund": { 
-     "refund_id": "2",
-     "status": "FULL",
-     "amount": { 
-        "value": 1.42, 
-        "currency": "RUB" 
-     },
-     "date_time": "2018-02-28T16:18:36" 
+  "amount": {
+    "currency": "RUB",
+    "value": "0.01"
   },
-  "bill": { 
-     "site_id": 529089,
-     "bill_id": "be7597f6-52bc-46f2-beb8-8bd329d42170",
-     "amount": { 
-        "value": 1.00, 
-        "currency": "RUB" 
-     },
-     "status": { 
-        "value": "WAITING",
-        "datetime": "2018-03-01T11:44:07" 
-     },
-     "comment": "test",
-     "creation_datetime": "2018-03-01T11:44:07",
-     "expiration_datetime": "2018-03-02T08:44:07",
-     "pay_url": "https://oplata.qiwi.com/form/?invoice_uid=be7597f6-52bc-46f2-beb8-8bd329d42170"
-  },
-  "result_code": "SUCCESS"
+  "dateTime": "2018-07-12T10:34:02.191+03:00",
+  "refundId": "1531380841742",
+  "status": "PARTIAL"
 }
 ```
 
 ### Информация о возврате
 
-Метод `getRefundInfo` запрашивает статус возврата, в параметрах нужно указать идентификатор счета `bill_id`, идентификатор возврата `refund_id` внутри вашей системы. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund-status).
+Метод `getRefundInfo` запрашивает статус возврата, в параметрах нужно указать идентификатор счета `billId`, идентификатор возврата `refundId` внутри вашей системы. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund-status).
 
 ```javascript
-const bill_id = '893794793973';
-const refund_id = '899343443';
+const billId = '893794793973';
+const refundId = '899343443';
 
-qiwiApi.getRefundInfo(bill_id, refund_id).then( data => {
+qiwiApi.getRefundInfo(billId, refundId).then( data => {
     //do with data
 });
 ```
@@ -246,27 +218,24 @@ qiwiApi.getRefundInfo(bill_id, refund_id).then( data => {
 В результате будет получен ответ c информацией о возврате:
 
 ```json
-{ 
-  "result_code": "SUCCESS",
-  "refund": { 
-     "refund_id": "2",
-     "status": "FULL",
-     "amount": { 
-        "value": 1.42, 
-        "currency": "RUB" 
-     },
-     "date_time": "2018-02-28T16:18:36" 
-  } 
+{
+  "amount": {
+    "currency": "RUB",
+    "value": "1.00"
+  },
+  "dateTime": "2018-07-11T15:06:55.987+03:00",
+  "refundId": "1520425084283",
+  "status": "PARTIAL"
 }
 
 ```
 
 ### Вспомогательные методы
 
-* Метод `generateId` возвращает строку в формате UUID v4, удобно для генерирования `bill_id`, `refund_id`:
+* Метод `generateId` возвращает строку в формате UUID v4, удобно для генерирования `billId`, `refundId`:
 
     ```javascript
-    const bill_id = qiwiApi.generateId();
+    const billId = qiwiApi.generateId();
     //e9b47ee9-b2f9-4b45-9438-52370670e2a6
     ```
 
@@ -292,14 +261,10 @@ qiwiApi.getRefundInfo(bill_id, refund_id).then( data => {
 
     const notificationData = {
         bill: {
-            site_id: 'test',
-            bill_id: 'test_bill',
-            amount: { value: 1, currency: 'RUB' },
-            status: { value: 'PAID', datetime: '2018-03-01T11:16:12' },
-            customer: {},
-            extra: {},
-            creation_datetime: '2018-03-01T11:15:39',
-            expiration_datetime: '2018-04-15T11:15:39'
+            siteId: 'test',
+            billId: 'test_bill',
+            amount: {value: 1, currency: 'RUB'},
+            status: {value: 'PAID'}
         },
         version: '3'
     };
