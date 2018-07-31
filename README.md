@@ -76,7 +76,7 @@ const fields = {
     amount: 1.00,
     currency: 'RUB',
     comment: 'test',
-    expirationDatetime: '2018-03-02T08:44:07',
+    expirationDateTime: '2018-03-02T08:44:07',
     email: 'example@mail.org',
     account : 'client4563'
 };
@@ -101,8 +101,8 @@ qiwiRestApi.createBill( billId, fields ).then( data => {
     "changedDateTime": "2018-07-12T10:28:38.855+03:00"
   },
   "comment": "test",
-  "creationDatetime": "2018-07-12T10:28:38.855+03:00",
-  "expirationDatetime": "2018-08-26T10:28:38.855+03:00",
+  "creationDateTime": "2018-07-12T10:28:38.855+03:00",
+  "expirationDateTime": "2018-08-26T10:28:38.855+03:00",
   "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=bb773791-9bd9-42c1-b8fc-3358cd108422"
 }
 ```
@@ -131,7 +131,7 @@ qiwiApi.getBillInfo(billId).then( data => {
   },
   "status": {
     "value": "WAITING",
-    "changedDateTime": "2018-07-12T10:31:06.846+03:00"
+    "changedDatetime": "2018-07-12T10:31:06.846+03:00"
   },
   "comment": "test",
   "creationDatetime": "2018-07-12T10:31:06.846+03:00",
@@ -167,8 +167,8 @@ qiwiApi.cancelBill(billId).then( data => {
     "changedDateTime": "2018-07-12T10:32:17.595+03:00"
   },
   "comment": "test",
-  "creationDatetime": "2018-07-12T10:32:17.481+03:00",
-  "expirationDatetime": "2018-08-26T10:32:17.481+03:00",
+  "creationDateTime": "2018-07-12T10:32:17.481+03:00",
+  "expirationDateTime": "2018-08-26T10:32:17.481+03:00",
   "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=a3fe62b2-9962-4d9d-9025-0766fb492546"
 }
 ```

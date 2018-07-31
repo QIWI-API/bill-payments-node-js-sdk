@@ -17,7 +17,7 @@ const amount = 200.345;
 const fields = {
     amount,
     currency: 'RUB',
-    expirationDatetime: qiwiApi.getLifetimeByDay(1),
+    expirationDateTime: qiwiApi.getLifetimeByDay(1),
     providerName: 'Test',
     comment: 'test'
 };
