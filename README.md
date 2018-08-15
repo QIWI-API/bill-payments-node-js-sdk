@@ -131,11 +131,11 @@ qiwiApi.getBillInfo(billId).then( data => {
   },
   "status": {
     "value": "WAITING",
-    "changedDatetime": "2018-07-12T10:31:06.846+03:00"
+    "changedDateTime": "2018-07-12T10:31:06.846+03:00"
   },
   "comment": "test",
-  "creationDatetime": "2018-07-12T10:31:06.846+03:00",
-  "expirationDatetime": "2018-08-26T10:31:06.846+03:00",
+  "creationDateTime": "2018-07-12T10:31:06.846+03:00",
+  "expirationDateTime": "2018-08-26T10:31:06.846+03:00",
   "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=ee3ad91d-cfb8-4dbf-8449-b6859fdfec3c"
 }
 ```
