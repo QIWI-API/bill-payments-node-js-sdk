@@ -19,7 +19,14 @@ const fields = {
     currency: 'RUB',
     expirationDateTime: qiwiApi.getLifetimeByDay(1),
     providerName: 'Test',
-    comment: 'test'
+    comment: 'test',
+    phone: '79999999999',
+    email: 'test@test.ru',
+    account: 'user uid on your side',
+    customFields: {
+        city: 'Москва',
+        street: 'Арбат'
+    }
 };
 
 describe('qiwi api v4', () => {
