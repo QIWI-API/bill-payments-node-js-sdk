@@ -1,5 +1,6 @@
 const QiwiBillPaymentsAPI = require('../lib/QiwiBillPaymentsAPI.js');
 const chai = require('chai');
+const packageJson = require('../package');
 const assert = chai.assert;
 
 const testConfig = require('./config.js');
@@ -38,14 +39,13 @@ describe('qiwi api v4', () => {
         it('creates payment form', () => {
             const testLink = `https://oplata.qiwi.com/create?publicKey=${publicKey}&amount=${parseFloat(
                 amount
-            ).toFixed(2)}&billId=${billId}`;
+            ).toFixed(2)}&billId=${billId}&customFields[apiClient]=node_sdk&customFields[apiClientVersion]=${packageJson.version}`;
 
             link = qiwiApi.createPaymentForm({
                 publicKey,
                 amount,
                 billId
             });
-
             assert.equal(link, testLink);
         });
 
@@ -96,7 +96,14 @@ describe('qiwi api v4', () => {
             });
 
             it('returns valid bill info', async () => {
-                await qiwiApi.getBillInfo(billId);
+                const testCustomFields = {
+                    city: 'Москва',
+                    street: 'Арбат',
+                    apiClient: 'node_sdk',
+                    apiClientVersion: packageJson.version
+                };
+                const result = await qiwiApi.getBillInfo(billId);
+                assert.deepEqual(result.customFields, testCustomFields);
             });
 
             it('cancel unpaid bill', async function () {
