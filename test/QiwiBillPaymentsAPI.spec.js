@@ -15,6 +15,8 @@ const publicKey = testConfig.merchantSecretKey;
 
 const amount = 200.345;
 
+const CLIENT_NAME = 'node_sdk';
+
 const fields = {
     amount,
     currency: 'RUB',
@@ -39,7 +41,7 @@ describe('qiwi api v4', () => {
         it('creates payment form', () => {
             const testLink = `https://oplata.qiwi.com/create?publicKey=${publicKey}&amount=${parseFloat(
                 amount
-            ).toFixed(2)}&billId=${billId}&customFields[apiClient]=node_sdk&customFields[apiClientVersion]=${packageJson.version}`;
+            ).toFixed(2)}&billId=${billId}&customFields[apiClient]=${CLIENT_NAME}&customFields[apiClientVersion]=${packageJson.version}`;
 
             link = qiwiApi.createPaymentForm({
                 publicKey,
@@ -96,12 +98,10 @@ describe('qiwi api v4', () => {
             });
 
             it('returns valid bill info', async () => {
-                const testCustomFields = {
-                    city: 'Москва',
-                    street: 'Арбат',
-                    apiClient: 'node_sdk',
+                const testCustomFields = Object.assign({
+                    apiClient: CLIENT_NAME,
                     apiClientVersion: packageJson.version
-                };
+                }, fields.customFields);
                 const result = await qiwiApi.getBillInfo(billId);
                 assert.deepEqual(result.customFields, testCustomFields);
             });
