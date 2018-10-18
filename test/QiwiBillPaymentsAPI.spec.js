@@ -13,6 +13,8 @@ const billId = qiwiApi.generateId();
 
 const publicKey = testConfig.merchantSecretKey;
 
+const successUrl = 'http://test.ru/';
+
 const amount = 200.345;
 
 const CLIENT_NAME = 'node_sdk';
@@ -29,7 +31,8 @@ const fields = {
     customFields: {
         city: 'Москва',
         street: 'Арбат'
-    }
+    },
+    successUrl
 };
 
 describe('qiwi api v4', () => {
@@ -41,12 +44,13 @@ describe('qiwi api v4', () => {
         it('creates payment form', () => {
             const testLink = `https://oplata.qiwi.com/create?publicKey=${publicKey}&amount=${parseFloat(
                 amount
-            ).toFixed(2)}&billId=${billId}&customFields[apiClient]=${CLIENT_NAME}&customFields[apiClientVersion]=${packageJson.version}`;
+            ).toFixed(2)}&billId=${billId}&successUrl=http%3A%2F%2Ftest.ru%2F&customFields[apiClient]=${CLIENT_NAME}&customFields[apiClientVersion]=${packageJson.version}`;
 
             link = qiwiApi.createPaymentForm({
                 publicKey,
                 amount,
-                billId
+                billId,
+                successUrl
             });
             assert.equal(link, testLink);
         });
