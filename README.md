@@ -60,7 +60,7 @@ const params = {
     publicKey,
     amount: 200,
     billId: '893794793973',
-    successUrl: 'http://test.ru/'
+    successUrl: 'https://merchant.com/payment/success?billId=893794793973'
 };
 
 const link = qiwiApi.createPaymentForm(params);
@@ -69,7 +69,7 @@ const link = qiwiApi.createPaymentForm(params);
 В результате:
 
 ```
-https://oplata.qiwi.com/create?publicKey=2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc&amount=200.34&billId=33aab9d5-b7b1-49e4-b52a-629a11ed7fc3&successUrl=http%3A%2F%2Ftest.ru%2F&customFields[apiClient]=node_sdk&customFields[apiClientVersion]=3.1.2
+https://oplata.qiwi.com/create?publicKey=2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc&amount=200&billId=893794793973&successUrl=https%3A%2F%2Fmerchant.com%2Fpayment%2Fsuccess%3FbillId%3D893794793973&customFields[apiClient]=node_sdk&customFields[apiClientVersion]=3.1.2
 ```
 
 ### Выставление счета
