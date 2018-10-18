@@ -59,7 +59,8 @@ const publicKey = '2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7
 const params = {
     publicKey,
     amount: 200,
-    billId: '893794793973'
+    billId: '893794793973',
+    successUrl: 'https://merchant.com/payment/success?billId=893794793973'
 };
 
 const link = qiwiApi.createPaymentForm(params);
@@ -68,7 +69,7 @@ const link = qiwiApi.createPaymentForm(params);
 В результате:
 
 ```
-https://oplata.qiwi.com/create?publicKey=2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc&amount=200&billId=893794793973
+https://oplata.qiwi.com/create?publicKey=2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6STQokqKrpCC6qrUUKEDZAJ7mvFnzr1yTebUiQaBLDnebLMMxL8nc6FF5zfmGQnypdXCbQJqHEJW5RJmKfj8nvgc&amount=200&billId=893794793973&successUrl=https%3A%2F%2Fmerchant.com%2Fpayment%2Fsuccess%3FbillId%3D893794793973&customFields[apiClient]=node_sdk&customFields[apiClientVersion]=3.1.2
 ```
 
 ### Выставление счета
@@ -86,7 +87,8 @@ const fields = {
     comment: 'test',
     expirationDateTime: '2018-03-02T08:44:07',
     email: 'example@mail.org',
-    account : 'client4563'
+    account : 'client4563',
+    successUrl: 'http://test.ru/'
 };
 
 qiwiRestApi.createBill( billId, fields ).then( data => {
@@ -111,7 +113,7 @@ qiwiRestApi.createBill( billId, fields ).then( data => {
   "comment": "test",
   "creationDateTime": "2018-07-12T10:28:38.855+03:00",
   "expirationDateTime": "2018-08-26T10:28:38.855+03:00",
-  "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=bb773791-9bd9-42c1-b8fc-3358cd108422"
+  "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=bb773791-9bd9-42c1-b8fc-3358cd108422&successUrl=http%3A%2F%2Ftest.ru%2F"
 }
 ```
 
