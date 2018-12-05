@@ -9,5 +9,5 @@ script:
 - npm run lint
 - npm test
 before_install:
-- openssl aes-256-cbc -K $encrypted_b6f5e83ee6c2_key -iv $encrypted_b6f5e83ee6c2_iv
+- openssl aes-256-cbc -K $encrypted_d9c253c28478_key -iv $encrypted_d9c253c28478_iv
   -in test/config.js.enc -out test/config.js -d
