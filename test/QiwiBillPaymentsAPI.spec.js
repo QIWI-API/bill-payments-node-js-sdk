@@ -115,19 +115,35 @@ describe('qiwi api v4', () => {
             });
 
             it('gets refund info', async () => {
-                await qiwiApi.getRefundInfo(
-                    testConfig.billIdForGetRefundInfoTest,
-                    testConfig.billRefundIdForGetRefundInfoTest
-                );
+                try {
+                    await qiwiApi.getRefundInfo(
+                        testConfig.billIdForGetRefundInfoTest,
+                        testConfig.billRefundIdForGetRefundInfoTest
+                    );
+                } catch (err) {
+                    const {serviceName, errorCode, description, userMessage} = err.error;
+                    assert.equal(serviceName, 'invoicing-api');
+                    assert.equal(errorCode, 'api.invoice.not.found');
+                    assert.equal(description, 'Invoice not found');
+                    assert.equal(userMessage, 'Invoice not found');
+                }
             });
 
             it('makes refund', async function () {
-                await qiwiApi.refund(
-                    testConfig.billIdForGetRefundInfoTest,
-                    Date.now(),
-                    '0.01',
-                    'RUB'
-                );
+                try {
+                    await qiwiApi.refund(
+                        testConfig.billIdForGetRefundInfoTest,
+                        Date.now(),
+                        '0.01',
+                        'RUB'
+                    );
+                } catch (err) {
+                    const {serviceName, errorCode, description, userMessage} = err.error;
+                    assert.equal(serviceName, 'invoicing-api');
+                    assert.equal(errorCode, 'api.invoice.not.found');
+                    assert.equal(description, 'Invoice not found');
+                    assert.equal(userMessage, 'Invoice not found');
+                }
             });
         });
     } catch (e) {
