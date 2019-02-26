@@ -21,7 +21,7 @@ const QiwiBillPaymentsAPI = require('@qiwi/bill-payments-node-js-sdk');
 
 ## Документация
 
-**API QIWI Касса**: https://developer.qiwi.com/ru/bill-payments
+**API QIWI Кассы**: https://developer.qiwi.com/ru/bill-payments
 
 ## Авторизация
 
