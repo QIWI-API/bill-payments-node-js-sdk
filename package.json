@@ -10,14 +10,14 @@
   "main": "lib/QiwiBillPaymentsAPI.js",
   "scripts": {
     "test": "mocha $NODE_DEBUG_OPTION --harmony test/QiwiBillPaymentsAPI.spec.js",
-    "lint": "eslint lib/QiwiBillPaymentsAPI.js lib/request.js"
+    "lint": "eslint lib/QiwiBillPaymentsAPI.js"
   },
   "author": "Maxim Kuznetsov <secondtonone.secondtonone@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.0.2",
-    "eslint": "^4.15.0",
-    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
