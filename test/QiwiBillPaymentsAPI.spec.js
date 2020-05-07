@@ -66,7 +66,7 @@ describe('qiwi api v4', () => {
                 bill: {
                     siteId: 'test',
                     billId: 'test_bill',
-                    amount: {value: 1, currency: 'RUB'},
+                    amount: {value: '1', currency: 'RUB'},
                     status: {value: 'PAID'}
                 }
             };
