@@ -184,6 +184,7 @@ qiwiApi.cancelBill(billId).then( data => {
 ```
 
 ### Возврат средств
+#### ! Метод недоступен для физических лиц
 
 Методом `refund` производит возврат средств. В параметрах нужно указать идентификатор счета `billId`, идентификатор возврата `refundId` внутри вашей системы, сумму возврата `amount` и валюту возврата `currency`. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund).
 
@@ -213,6 +214,7 @@ qiwiApi.refund(billId, refundId, amount, currency).then( data => {
 ```
 
 ### Информация о возврате
+#### ! Метод недоступен для физических лиц
 
 Метод `getRefundInfo` запрашивает статус возврата, в параметрах нужно указать идентификатор счета `billId`, идентификатор возврата `refundId` внутри вашей системы. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund-status).
 
