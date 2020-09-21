@@ -80,7 +80,7 @@ https://oplata.qiwi.com/create?publicKey=2tbp1WQvsgQeziGY9vTLe9vDZNg7tmCymb4Lh6S
 Метод `createBill` выставляет новый счет. В параметрах нужно указать: идентификатор счета `billId` внутри вашей системы и дополнительными параметрами `fields`. В результате будет получен ответ с данными о выставленном счете.
 
 ```javascript
-const billId = '893794793973';
+const billId = 'cc961e8d-d4d6-4f02-b737-2297e51fb48e';
 
 const fields = {
     amount: 1.00,
@@ -92,7 +92,7 @@ const fields = {
     successUrl: 'http://test.ru/'
 };
 
-qiwiRestApi.createBill( billId, fields ).then( data => {
+qiwiApi.createBill( billId, fields ).then( data => {
     //do with data
 });
 ```
@@ -123,7 +123,7 @@ qiwiRestApi.createBill( billId, fields ).then( data => {
 Метод `getBillInfo` возвращает информацию о счете. В параметрах нужно указать идентификатор счета `billId` внутри вашей системы, в результате будет получен ответ со статусом счета. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#invoice-status).
 
 ```javascript
-const billId = '893794793973';
+const billId = 'cc961e8d-d4d6-4f02-b737-2297e51fb48e';
 
 qiwiApi.getBillInfo(billId).then( data => {
     //do with data
@@ -135,7 +135,7 @@ qiwiApi.getBillInfo(billId).then( data => {
 ```json
 {
   "siteId": "270305",
-  "billId": "4fa5cb2a-942e-4e67-b552-ff10c71d6f8d",
+  "billId": "cc961e8d-d4d6-4f02-b737-2297e51fb48e",
   "amount": {
     "currency": "RUB",
     "value": "200.34"
@@ -156,7 +156,7 @@ qiwiApi.getBillInfo(billId).then( data => {
 Метод `cancelBill` отменяет неоплаченный счет. В параметрах нужно указать идентификатор счета `billId` внутри вашей системы, в результате будет получен ответ с информацией о счете. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#invoice-status).
 
 ```javascript
-const billId = '893794793973';
+const billId = 'cc961e8d-d4d6-4f02-b737-2297e51fb48e';
 
 qiwiApi.cancelBill(billId).then( data => {
     //do with data
@@ -168,7 +168,7 @@ qiwiApi.cancelBill(billId).then( data => {
 ```json
 {
   "siteId": "270305",
-  "billId": "60418b7e-1e95-4ac0-936e-0b98d7a7fdae",
+  "billId": "cc961e8d-d4d6-4f02-b737-2297e51fb48e",
   "amount": {
     "currency": "RUB",
     "value": "200.34"
@@ -180,7 +180,7 @@ qiwiApi.cancelBill(billId).then( data => {
   "comment": "test",
   "creationDateTime": "2018-07-12T10:32:17.481+03:00",
   "expirationDateTime": "2018-08-26T10:32:17.481+03:00",
-  "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=a3fe62b2-9962-4d9d-9025-0766fb492546"
+  "payUrl": "https://oplata.qiwi.com/form/?invoice_uid=cc961e8d-d4d6-4f02-b737-2297e51fb48e"
 }
 ```
 
@@ -190,7 +190,7 @@ qiwiApi.cancelBill(billId).then( data => {
 Методом `refund` производит возврат средств. В параметрах нужно указать идентификатор счета `billId`, идентификатор возврата `refundId` внутри вашей системы, сумму возврата `amount` и валюту возврата `currency`. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund).
 
 ```javascript
-const billId = '893794793973';
+const billId = 'cc961e8d-d4d6-4f02-b737-2297e51fb48e';
 const refundId = '899343443';
 const amount = 12;
 const currency = 'RUB'
@@ -220,7 +220,7 @@ qiwiApi.refund(billId, refundId, amount, currency).then( data => {
 Метод `getRefundInfo` запрашивает статус возврата, в параметрах нужно указать идентификатор счета `billId`, идентификатор возврата `refundId` внутри вашей системы. Подробнее в [документации](https://developer.qiwi.com/ru/bill-payments/#refund-status).
 
 ```javascript
-const billId = '893794793973';
+const billId = 'cc961e8d-d4d6-4f02-b737-2297e51fb48e';
 const refundId = '899343443';
 
 qiwiApi.getRefundInfo(billId, refundId).then( data => {
@@ -275,17 +275,17 @@ qiwiApi.getRefundInfo(billId, refundId).then( data => {
     const notificationData = {
         bill: {
             siteId: 'test',
-            billId: 'test_bill',
+            billId: 'cc961e8d-d4d6-4f02-b737-2297e51fb48e',
             amount: {value: 1, currency: 'RUB'},
             status: {value: 'PAID'}
         },
         version: '3'
     };
   
-    const merchantSecret = 'test-merchant-secret-for-signature-check';
+    const secretKey = 'eyJ2ZXJzaW9uIjoicmVzdF92MyIsImRhdGEiOnsibWVyY2hhbnRfaWQiOjUyNjgxMiwiYXBpX3VzZXJfaWQiOjcxNjI2MTk3LCJzZWNyZXQiOiJmZjBiZmJiM2UxYzc0MjY3YjIyZDIzOGYzMDBkNDhlYjhiNTnONPININONPN090MTg5Z**********************';
   
     qiwiApi.checkNotificationSignature(
-        validSignatureFromNotificationServer, notificationData, merchantSecret
+        validSignatureFromNotificationServer, notificationData, secretKey
     ); // true
 
     ```
