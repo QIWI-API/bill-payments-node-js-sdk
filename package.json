@@ -8,6 +8,7 @@
     "url": "git+https://github.com/QIWI-API/bill-payments-node-js-sdk.git"
   },
   "main": "lib/QiwiBillPaymentsAPI.js",
+  "types": "typings/index.d.ts",
   "scripts": {
     "test": "mocha $NODE_DEBUG_OPTION --harmony test/QiwiBillPaymentsAPI.spec.js",
     "lint": "eslint lib/QiwiBillPaymentsAPI.js"
