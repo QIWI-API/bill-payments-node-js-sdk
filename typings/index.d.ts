@@ -15,7 +15,7 @@ declare module '@qiwi/bill-payments-node-js-sdk' {
 
   export type CreateBillArguments = {
     amount: string | number,
-    currency?: string,
+    currency: string,
     comment?: string,
     expirationDateTime: string,
     customFields?: Record<any, any>,
