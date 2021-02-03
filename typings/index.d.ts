@@ -25,7 +25,7 @@ declare module '@qiwi/bill-payments-node-js-sdk' {
     successUrl?: string,
   }
 
-  export class QiwiBillPaymentsAPI {
+  export default class QiwiBillPaymentsAPI {
     private _key: string
 
     public constructor (key: string)
@@ -65,6 +65,4 @@ declare module '@qiwi/bill-payments-node-js-sdk' {
     ): Promise<Record<any, any>>
 
   }
-
-  export default QiwiBillPaymentsAPI
 }
