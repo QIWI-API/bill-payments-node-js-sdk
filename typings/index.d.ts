@@ -1,4 +1,4 @@
-declare module '@qiwi/qiwi-bill-payments-node-js-sdk' {
+declare module '@qiwi/bill-payments-node-js-sdk' {
 
   type RequestBuilderArguments = {
     url: string,
