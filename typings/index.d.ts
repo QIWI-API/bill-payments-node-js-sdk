@@ -6,22 +6,22 @@ declare module '@qiwi/bill-payments-node-js-sdk' {
     body?: Record<any, any>,
   }
 
-  type CreatePublicFormArguments = {
+  export type CreatePublicFormArguments = {
     billId: string | number,
     publicKey: string,
     amount: string | number,
     successUrl: string,
   }
 
-  type CreateBillArguments = {
+  export type CreateBillArguments = {
     amount: string | number,
     currency: string,
     comment?: string,
     expirationDateTime: string,
     customFields?: Record<any, any>,
-    phone: string,
-    email: string,
-    account: string,
+    phone?: string,
+    email?: string,
+    account?: string,
     successUrl: string,
   }
 
@@ -65,4 +65,6 @@ declare module '@qiwi/bill-payments-node-js-sdk' {
     ): Promise<Record<any, any>>
 
   }
+
+  export default QiwiBillPaymentsAPI
 }
