@@ -1,18 +1,17 @@
 {
-  "name": "@qiwi/bill-payments-node-js-sdk",
+  "name": "@vicimpa/qiwi-sdk",
   "version": "3.2.1",
   "description": "Universal payments API SDK",
-  "homepage": "https://github.com/QIWI-API/bill-payments-node-js-sdk",
+  "homepage": "https://github.com/vicimpa/qiwi-sdk",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QIWI-API/bill-payments-node-js-sdk.git"
+    "url": "git+https://github.com/vicimpa/qiwi-sdk.git"
   },
-  "main": "lib/QiwiBillPaymentsAPI.js",
-  "scripts": {
-    "test": "mocha $NODE_DEBUG_OPTION --harmony test/QiwiBillPaymentsAPI.spec.js",
-    "lint": "eslint lib/QiwiBillPaymentsAPI.js"
-  },
-  "author": "Maxim Kuznetsov <secondtonone.secondtonone@gmail.com>",
+  "main": "dist/index.js",
+  "authors": [
+    "Maxim Kuznetsov <secondtonone.secondtonone@gmail.com>",
+    "PromiSe#### <vicimpa@ya.ru>"
+  ],
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.0.2",
@@ -25,15 +24,16 @@
     "mocha": "^5.2.0"
   },
   "dependencies": {
+    "@types/node": "~14.14.31",
+    "@types/request-promise": "~4.1.47",
+    "@types/uuid": "~8.3.0",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
     "uuid": "^3.2.1"
   },
   "bugs": {
-    "url": "https://github.com/QIWI-API/bill-payments-node-js-sdk/issues"
+    "url": "https://github.com/vicimpa/qiwi-sdk/issues"
   },
   "directories": {
-    "lib": "lib",
-    "test": "test"
   }
 }
