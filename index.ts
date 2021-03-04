@@ -31,7 +31,6 @@ export interface CreatePaymentFormParams {
 }
 
 export interface CreateBillParams {
-  billId: string
   currency?: Currency
   amount: number
   expirationDateTime: Date
