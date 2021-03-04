@@ -55,13 +55,12 @@ function query(obj: Any | AnyType, format = (v: string) => `${v}`) {
 }
 
 export class BaseApi {
-  private _key: string
-  private _base = 'https://api.qiwi.com/partner/bill/v1/bills'
+  key: string
+  base = 'https://api.qiwi.com/partner/bill/v1/bills'
 
-  set key(v: string) { this._key = v }
 
   constructor(key?: string) {
-    this._key = key
+    this.key = key
   }
 
   generateId(): string {
@@ -104,8 +103,8 @@ export class BaseApi {
   }
 
   async requestBuilder({ url, method, query = null, body = null }: BuildParams) {
-    const key = this._key;
-    const base = this._base;
+    const key = this.key;
+    const base = this.base;
 
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
