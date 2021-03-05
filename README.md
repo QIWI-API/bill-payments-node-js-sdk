@@ -1,7 +1,7 @@
 # Universal payments API Node.js SDK
 
-[![Build Status](https://travis-ci.org/QIWI-API/bill-payments-node-js-sdk.svg?branch=master)](https://travis-ci.org/QIWI-API/bill-payments-node-js-sdk)
-[![npm (scoped)](https://img.shields.io/npm/v/@qiwi/bill-payments-node-js-sdk.svg)](https://www.npmjs.com/package/@qiwi/bill-payments-node-js-sdk)
+[![Build Status](https://travis-ci.org/vicimpa/qiwi-sdk.svg?branch=master)](https://travis-ci.org/vicimpa/qiwi-sdk)
+[![npm (scoped)](https://img.shields.io/npm/v/@vicimpa/qiwi-sdk.svg)](https://www.npmjs.com/package/@vicimpa/qiwi-sdk)
 
 Node.js SDK модуль для внедрения единого платежного протокола эквайринга и QIWI Кошелька.
 
@@ -10,13 +10,17 @@ Node.js SDK модуль для внедрения единого платежн
 Установка с помощью npm:
 
 ```bash
-$ npm install @qiwi/bill-payments-node-js-sdk --save
+$ npm install @vicimpa/qiwi-sdk --save
 ```
 
 Подключение:
 
 ```javascript
-const QiwiBillPaymentsAPI = require('@qiwi/bill-payments-node-js-sdk');
+const { QiwiPaymentsAPI } = require('@vicimpa/qiwi-sdk');
+```
+
+```javascript
+import { QiwiPaymentsAPI } from "@vicimpa/qiwi-sdk";
 ```
 
 ## Документация
@@ -296,22 +300,10 @@ qiwiApi.getRefundInfo(billId, refundId).then( data => {
 
     ```
 
-## Тестирование
-
-```bash
-$ cd bill-payments-node-js-sdk
-npm install
-npm run test
-```
-
 ## Требования
 
 * **Node.js v7.0.0**, запуск c флагом `--harmony`
 * **Node.js v7.6.0** или выше 
-
-или 
-
-* **Babel** с плагином `babel-preset-es2017`
 
 ## Лицензия
 

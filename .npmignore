@@ -1,7 +1,5 @@
-.gitignore
-*.sublime-workspace
-*.sublime-project
-*.code-workspace
-.vscode
-.idea
-.log
+node_modules
+index.ts
+request.ts
+src
+package-lock.json
